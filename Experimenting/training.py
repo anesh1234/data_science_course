@@ -70,10 +70,6 @@ imagePaths = np.array(imagePaths)
 # perform one-hot encoding on the labels
 lb = LabelBinarizer()
 labels = lb.fit_transform(labels)
-# only there are only two labels in the dataset, then we need to use
-# Keras/TensorFlow's utility function as well
-if len(lb.classes_) == 2:
-	labels = to_categorical(labels)
 	
 # partition the data into training and testing splits using 80% of
 # the data for training and the remaining 20% for testing
