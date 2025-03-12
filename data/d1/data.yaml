@@ -1,0 +1,13 @@
+train: d1/train/images
+val: d1/valid/images
+test: d1/test/images
+
+nc: 9
+names: ['Abcess', 'Badly Decayed', 'Caries', 'Crown', 'Normal', 'Overhang', 'Post', 'RCT', 'Restoration']
+
+roboflow:
+  workspace: dent-dataset
+  project: dental-annotation
+  version: 16
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/dent-dataset/dental-annotation/dataset/16
