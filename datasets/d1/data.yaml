@@ -3,6 +3,10 @@ train: train/images
 val: valid/images
 test: test/images
 
+train_label_dir: train/labels
+val_label_dir: valid/labels
+test_labels_dir: test/labels
+
 nc: 9
 names: ['Abcess', 'Badly Decayed', 'Caries', 'Crown', 'Normal', 'Overhang', 'Post', 'RCT', 'Restoration']
 

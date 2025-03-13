@@ -1,4 +1,3 @@
-from test.test_itertools import batched
 from ultralytics import YOLO
 from config import *
 
