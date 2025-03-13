@@ -8,7 +8,7 @@ results = model.train(data= "datasets/d1/data.yaml",  # data (str): Path to data
                       epochs= 1,                      # epochs (int): Number of training epochs., 
                       batch= 10,                      # batch (int): Batch size for training.
                       imgsz= 640,                     # imgsz (int): Input image size.
-                      device= None,                   # device (str): Device to run training on (e.g., 'cuda', 'cpu').
+                      device= 'cuda',                   # device (str): Device to run training on (e.g., 'cuda', 'cpu').
                       workers= None,                  # workers (int): Number of worker threads for data loading.
                       optimizer= 'auto',              # optimizer (str): Optimizer to use for training.
                       lr0= None,                      # lr0 (float): Initial learning rate.

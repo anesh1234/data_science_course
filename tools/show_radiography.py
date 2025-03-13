@@ -89,6 +89,7 @@ def plotTwoImagesWithBoundingBoxes(image1: Image.Image, image2: Image.Image, bbo
 
     #########################################################################################
 
+    # Plot the original image WITHOUT bounding boxes on the bottom right
     axes[1,0].imshow(image2)
     axes[1,0].set_title(img_titles[2])
     axes[1,0].axis("off")

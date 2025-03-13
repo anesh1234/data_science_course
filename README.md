@@ -1,1 +1,5 @@
 # data_science_course
+
+# Setting up the environment
+A requirements.txt file was made so that anyone easily can reproduce our Python environment. We have used Python 3.12 for this project, and working with environments in this version is detailed at
+[text](https://docs.python.org/3.12/tutorial/venv.html)
