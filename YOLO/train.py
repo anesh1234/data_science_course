@@ -14,5 +14,6 @@ results = model.train(data=DATA,
                       workers=WORKERS,
                       optimizer=OPTIMIZER,
                       lr0=LR0,
-                      patience=PATIENCE
+                      patience=PATIENCE,
+                      save_dir=SAVE_DIR
                       )
