@@ -1,4 +1,4 @@
-# Create a dictionary to map class names to index values
+# A dictionary to map class names to index values
 class_to_index = {'Implant' : 0,
                 'Fillings' : 1,
                 'Impacted Tooth' : 2,
