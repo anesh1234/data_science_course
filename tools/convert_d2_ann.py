@@ -3,7 +3,7 @@ Python program used to convert the csv annotations of the dataset d2 to YOLO ann
 '''
 import pandas as pd
 
-commonPath = "../datasets/d2/"
+commonPath = "datasets/d2/"
 trainFolder = commonPath + "train/"
 testFolder = commonPath + "test/"
 valFolder = commonPath + "valid/"
@@ -47,11 +47,11 @@ def to_Yolo(df, folder):
     
     # Transform the class_name field in class_id 
     df = df.sort_values(by=["class"])  # to ensure the factorize function encounter the classes in the same order
-    df["class"] = pd.factorize(df["class"])[0]
+    # df["class"] = pd.factorize(df["class"])[0]
 
     # uncomment these two lines and comment the line above for debug purposes 
-    # df["class"], classes = pd.factorize(df["class"])
-    # print(classes) # uncomment to see the classes name
+    df["class"], classes = pd.factorize(df["class"])
+    print(classes) # uncomment to see the classes name
     
     # Create the x and y postitions of the bounding boxes
     df["xpos"] = df.apply(lambda row: ((row.xmin + row.xmax)/2)/imWidth, axis=1)
@@ -65,7 +65,7 @@ def to_Yolo(df, folder):
     df = df.drop(columns = ["xmin", "ymin", "xmax", "ymax"])
 
     # create the YOLO labels
-    df.apply(lambda row: write_YOLO_annotation(row, folder), axis=1)
+    # df.apply(lambda row: write_YOLO_annotation(row, folder), axis=1)
 
 to_Yolo(trainCsvAnn, trainFolder)
 to_Yolo(testCsvAnn, testFolder)
