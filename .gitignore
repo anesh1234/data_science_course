@@ -170,5 +170,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# YOLO output folder
-runs/
+# Nix shell configuration (It is not able to run YOLO)
+shell.nix
