@@ -1,7 +1,7 @@
 path: D:\git-repos\data_science_course\datasets\d1 # dataset root dir
 train: train/images
-val: valid/images
 test: test/images
+val: valid/images
 
 train_label_dir: train/labels
 val_label_dir: valid/labels
