@@ -172,3 +172,6 @@ cython_debug/
 
 # Nix shell configuration (It is not able to run YOLO)
 shell.nix
+
+# Model files
+*.safetensors
