@@ -175,3 +175,4 @@ shell.nix
 
 # Model files
 *.safetensors
+*.pt
