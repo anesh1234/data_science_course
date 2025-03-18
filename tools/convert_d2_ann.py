@@ -1,5 +1,6 @@
 '''
 Python program used to convert the csv annotations of the dataset d2 to YOLO annotations
+Can be called from the main folder by running 'python tools/convert_d2_ann.py'
 '''
 import pandas as pd
 
@@ -65,7 +66,7 @@ def to_Yolo(df, folder):
     df = df.drop(columns = ["xmin", "ymin", "xmax", "ymax"])
 
     # create the YOLO labels
-    # df.apply(lambda row: write_YOLO_annotation(row, folder), axis=1)
+    df.apply(lambda row: write_YOLO_annotation(row, folder), axis=1)
 
 to_Yolo(trainCsvAnn, trainFolder)
 to_Yolo(testCsvAnn, testFolder)

@@ -1,0 +1,10 @@
+train: train/images
+val: valid/images
+test: test/images
+
+train_label_dir: train/labels
+val_label_dir: valid/labels
+test_label_dir: test/labels
+
+nc: 16
+['Abcess', 'Badly Decayed', 'Broken Down Crow/Root', 'Caries', 'Cavity', 'Crown', 'Fillings', 'Fractured', 'Impacted Tooth', 'Implant', 'Infected', 'Normal', 'Overhang', Post', 'RCT', 'Restoration']

@@ -31,11 +31,11 @@ def add_whitespace(img, bboxes:pd.DataFrame, h, w):
 
     return {"image": white_img, "bboxes": adjusted_bboxes}
 
-test_img = Image.open("data/radiography_scaled/test/0004_jpg.rf.6434bfce7667ea786e5f251dc0d8b8b1.jpg")
+test_img = Image.open("datasets/radiography_scaled/test/0004_jpg.rf.6434bfce7667ea786e5f251dc0d8b8b1.jpg")
 filename = '0004_jpg.rf.6434bfce7667ea786e5f251dc0d8b8b1.jpg'
 
 # Get bounding boxes and labels for the current image
-anns = pd.read_csv('data/radiography_scaled/test/_annotations.csv')
+anns = pd.read_csv('datasets/radiography_scaled/test/_annotations.csv')
 
 # Convert the 'class' column to index values and reduce the dataframe
 anns['class'] = anns['class'].map(config.class_to_index)
