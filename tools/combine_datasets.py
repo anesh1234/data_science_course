@@ -120,7 +120,7 @@ def unifyDataset(datasetPath):
                     for_write = []
                     for line in tmp:
                         label = line[0] # Only works because there are no labels above 9
-                        modified_line = replaceLabels(label, d1Path) + line[1:]
+                        modified_line = replaceLabels(label, datasetPath) + line[1:]
                         for_write.append(modified_line)
 
                     with open(os.path.join(destPath, file), "w") as write:
