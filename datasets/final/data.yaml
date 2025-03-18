@@ -1,3 +1,5 @@
+path: D:/git-repos/data_science_course/datasets/final # dataset root dir
+
 train: train/images
 val: valid/images
 test: test/images
@@ -7,4 +9,4 @@ val_label_dir: valid/labels
 test_label_dir: test/labels
 
 nc: 16
-['Abcess', 'Badly Decayed', 'Broken Down Crow/Root', 'Caries', 'Cavity', 'Crown', 'Fillings', 'Fractured', 'Impacted Tooth', 'Implant', 'Infected', 'Normal', 'Overhang', Post', 'RCT', 'Restoration']
+names: ['Abcess', 'Badly Decayed', 'Broken Down Crow/Root', 'Caries', 'Cavity', 'Crown', 'Fillings', 'Fractured', 'Impacted Tooth', 'Implant', 'Infected', 'Normal', 'Overhang', Post', 'RCT', 'Restoration']

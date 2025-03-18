@@ -1,8 +1,7 @@
 from ultralytics import YOLO
 
-# Load the YOLOv11 nano pretrained model if it exists,
-# downloads otherwise
-model = YOLO("yolo11n.pt")  # pretrained YOLO11n model
+# Load the YOLOv11 nano pretrained model
+model = YOLO("YOLO/test/train4/weights/best.pt")  # pretrained YOLO11n model
 
 # Run batched inference on a list of images
 # Returns a list of Results objects
