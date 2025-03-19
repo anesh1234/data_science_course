@@ -1,6 +1,6 @@
 task: detect
 mode: train
-model: yolo11n.pt
+model: yolo11n.yaml
 data: datasets/final/data.yaml
 epochs: 300
 time: null
@@ -12,8 +12,8 @@ save_period: -1
 cache: false
 device: cuda
 workers: 8
-project: YOLO/pt_frozen
-name: train
+project: YOLO/npt_nfrozen
+name: train3
 exist_ok: false
 pretrained: true
 optimizer: Adam
@@ -28,7 +28,7 @@ resume: false
 amp: true
 fraction: 1.0
 profile: false
-freeze: 11
+freeze: None
 multi_scale: false
 overlap_mask: true
 mask_ratio: 4
@@ -103,4 +103,4 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
-save_dir: YOLO\pt_frozen\train
+save_dir: YOLO\npt_nfrozen\train3

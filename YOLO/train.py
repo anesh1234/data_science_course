@@ -3,13 +3,7 @@ import torch
 import multiprocessing
 import yaml
 
-def main():
-
-    # Possible configs:
-    # 'npt_nfrozen' - Not pre-trained and no frozen layers
-    # 'pt_frozen' - Pre-trained and frozen CNN backbone
-    # 'pt_nfrozen' - Pre-trained and no frozen layers
-    config_name = 'pt_frozen'
+def main(config_name:str):
 
     # Show GPU status
     DEVICE = None
@@ -32,7 +26,7 @@ def main():
     # https://docs.ultralytics.com/modes/train/#train-settings
     model.train(data= "datasets/final/data.yaml",  # data (str): Path to dataset configuration file.
                 epochs= 300,                       # epochs (int): Number of training epochs. 
-                batch= 40,                         # Batch size, with three modes: set as an integer (e.g., batch=16), auto mode for 60% GPU memory utilization (batch=-1), or auto mode with specified utilization fraction (batch=0.70).
+                batch= 60,                         # Batch size, with three modes: set as an integer (e.g., batch=16), auto mode for 60% GPU memory utilization (batch=-1), or auto mode with specified utilization fraction (batch=0.70).
                 imgsz= 640,                        # imgsz (int): Input image size.
                 device= DEVICE,                    # device (str): Device to run training on (e.g., 'cuda', 'cpu').
                 optimizer= 'Adam',                 # optimizer (str): Options include SGD, Adam, AdamW, NAdam, RAdam, RMSProp etc., or auto for automatic selection based on model configuration. Affects convergence speed and stability.    
@@ -71,4 +65,12 @@ def main():
 # current process has finished its bootstrapping phase
 if __name__ == '__main__':
     multiprocessing.freeze_support()
-    main()
+
+    # Possible configs:
+    # 'npt_nfrozen' - Not pre-trained and no frozen layers
+    # 'pt_frozen' - Pre-trained and frozen CNN backbone
+    # 'pt_nfrozen' - Pre-trained and no frozen layers
+
+    yolo_train_batch = ['npt_nfrozen', 'pt_frozen', 'pt_nfrozen']
+    for model in yolo_train_batch:
+        main(model)
