@@ -3,15 +3,37 @@ Python program used to convert the csv annotations of the dataset d2 to YOLO ann
 Can be called from the main folder by running 'python tools/convert_d2_ann.py'
 '''
 import pandas as pd
+import os
+import shutil
 
 commonPath = "datasets/d2/"
-trainFolder = commonPath + "train/"
-testFolder = commonPath + "test/"
-valFolder = commonPath + "valid/"
+trainFolder = os.path.join(commonPath, "train/")
+testFolder = os.path.join(commonPath, "test/")
+valFolder = os.path.join(commonPath, "valid/")
 
-trainCsvAnn = pd.read_csv(trainFolder + "_annotations.csv")
-testCsvAnn = pd.read_csv(testFolder + "_annotations.csv")
-valCsvAnn = pd.read_csv(valFolder + "_annotations.csv")
+trainCsvAnn = pd.read_csv(os.path.join(trainFolder, "_annotations.csv"))
+testCsvAnn = pd.read_csv(os.path.join(testFolder, "_annotations.csv"))
+valCsvAnn = pd.read_csv(os.path.join(valFolder, "_annotations.csv"))
+
+def clean():
+    '''
+    Clean the label folders
+    '''
+    trainLabelFolder = os.path.join(trainFolder, "labels")
+    testLabelFolder = os.path.join(testFolder, "labels")
+    valLabelFolder = os.path.join(valFolder, "labels")
+
+    # Delete the label folders
+    if os.path.exists(trainLabelFolder):
+        shutil.rmtree(trainLabelFolder)
+    if os.path.exists(testLabelFolder):
+        shutil.rmtree(testLabelFolder)
+    if os.path.exists(valLabelFolder):
+        shutil.rmtree(valLabelFolder)
+    
+    os.mkdir(trainLabelFolder)
+    os.mkdir(testLabelFolder)
+    os.mkdir(valLabelFolder)
 
 def write_YOLO_annotation(row, folder):
     '''
@@ -27,9 +49,10 @@ def write_YOLO_annotation(row, folder):
     data = ""
     for i in range(1,6):
         data = data + " " + str(row.iloc[i]) 
-    # print(data)
 
     file.write(data + "\n")
+
+    file.close()
 
 def to_Yolo(df, folder):
     '''
@@ -48,11 +71,9 @@ def to_Yolo(df, folder):
     
     # Transform the class_name field in class_id 
     df = df.sort_values(by=["class"])  # to ensure the factorize function encounter the classes in the same order
-    # df["class"] = pd.factorize(df["class"])[0]
 
-    # uncomment these two lines and comment the line above for debug purposes 
     df["class"], classes = pd.factorize(df["class"])
-    print(classes) # uncomment to see the classes name
+    print(classes) # To make sure all the classes follow the same order depending on the working folder
     
     # Create the x and y postitions of the bounding boxes
     df["xpos"] = df.apply(lambda row: ((row.xmin + row.xmax)/2)/imWidth, axis=1)
@@ -68,6 +89,7 @@ def to_Yolo(df, folder):
     # create the YOLO labels
     df.apply(lambda row: write_YOLO_annotation(row, folder), axis=1)
 
+clean()
 to_Yolo(trainCsvAnn, trainFolder)
 to_Yolo(testCsvAnn, testFolder)
 to_Yolo(valCsvAnn, valFolder)
