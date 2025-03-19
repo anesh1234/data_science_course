@@ -1,0 +1,3 @@
+model: yolo11n.pt
+freeze: 11
+project: YOLO/pt_frozen

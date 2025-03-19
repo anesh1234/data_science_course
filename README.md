@@ -7,7 +7,7 @@ Create a new virtual environment
 python3.12 -m venv .venv
 ```
 
-Activate the environment
+Activate the environment. If you are working in VSCode, please make sure you are using Command Prompt and not PowerShell as your terminal, as PowerShell may prevent you from activating the environment.
 ```Shell
 .venv\Scripts\activate
 ```
@@ -16,3 +16,6 @@ Import the requirements into the environment:
 ```Shell
 pip install -r requirements.txt
 ```
+
+## File Structure
+The [YOLO](https://github.com/anesh1234/data_science_course/tree/main/YOLO) folder contains files related to the YOLO model directly, including the train.py script, the predict.py script (perform inference with a model) and folder structures for storing results from running the training.
