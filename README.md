@@ -17,5 +17,8 @@ Import the requirements into the environment:
 pip install -r requirements.txt
 ```
 
+To enable training on GPU, you will need a CUDA enabled GPU, wchich can be checked at [NVIDIA's page](https://developer.nvidia.com/cuda-gpus), with its latest driver.
+Further, the pytorch library must be installed in a [specific way](https://pytorch.org/get-started/locally), this is already in the requirements.txt, but might change over time.
+
 ## File Structure
-The [YOLO](https://github.com/anesh1234/data_science_course/tree/main/YOLO) folder contains files related to the YOLO model directly, including the train.py script, the predict.py script (perform inference with a model) and folder structures for storing results from running the training.
+The [YOLO](https://github.com/anesh1234/data_science_course/tree/main/YOLO) folder contains files related to the YOLO model directly, including the train.py script, the predict.py script (perform inference with a model) and folder structures for storing results from running the training. Each model configuration we trained has its own folder, which contains their respective training results.

@@ -5,7 +5,9 @@ def main():
     # Load a YOLOv11 Nano model if it exists, downloads otherwise
     model = YOLO('yolo11n.pt')
     results = model.tune(data= "datasets/final/data.yaml",
-                         iterations=2)
+                         iterations= 2,
+                         use_ray= True
+                         )
 
     print(results)
 
