@@ -30,31 +30,31 @@ def main(config_name:str):
                 imgsz= 640,                        # imgsz (int): Input image size.
                 device= DEVICE,                    # device (str): Device to run training on (e.g., 'cuda', 'cpu').
                 optimizer= 'Adam',                 # optimizer (str): Options include SGD, Adam, AdamW, NAdam, RAdam, RMSProp etc., or auto for automatic selection based on model configuration. Affects convergence speed and stability.    
-                patience= 10,                      # patience (int): Epochs to wait for no observable improvement for early stopping of training.
+                patience= 20,                      # patience (int): Epochs to wait for no observable improvement for early stopping of training.
                 plots= True,                       # plots (bool): Generates and saves plots of training and validation metrics, as well as prediction examples, providing visual insights into model performance and learning progression.
                 freeze= config['freeze'],          # freeze (int or list): Freezes the first N layers of the model or specified layers by index, reducing the number of trainable parameters. Useful for fine-tuning or transfer learning.
                 project= config['project'],        # project (str): Name of the project directory where training outputs are saved. Allows for organized storage of different experiments.
-                lr0= 0.00893,                      #* lr0 (float): Initial learning rate.
-                lrf= 0.01051,
-                momentum= 0.95651,
-                weight_decay= 0.00042,
-                warmup_epochs= 2.49692,
-                warmup_momentum= 0.64691,
-                box= 4.68758,
-                cls= 0.50305,
-                dfl= 1.60936,
-                hsv_h= 0.015,
-                hsv_s= 0.55544,
-                hsv_v= 0.34815,
+                lr0= 0.00956,
+                lrf= 0.01013,
+                momentum= 0.97294,
+                weight_decay= 0.00043,
+                warmup_epochs= 3.08681,
+                warmup_momentum= 0.82874,
+                box= 7.75731,
+                cls= 0.4832,
+                dfl= 1.46943,
+                hsv_h= 0.01507,
+                hsv_s= 0.65767,
+                hsv_v= 0.42403,
                 degrees= 0.0,
-                translate= 0.1,
-                scale= 0.59181,
+                translate= 0.09804,
+                scale= 0.52976,
                 shear= 0.0,
                 perspective= 0.0,
                 flipud= 0.0,
-                fliplr= 0.44849,
+                fliplr= 0.58352,
                 bgr= 0.0,
-                mosaic= 1.0,
+                mosaic= 0.99633,
                 mixup= 0.0,
                 copy_paste= 0.0
                 )
@@ -71,6 +71,6 @@ if __name__ == '__main__':
     # 'pt_frozen' - Pre-trained and frozen CNN backbone
     # 'pt_nfrozen' - Pre-trained and no frozen layers
 
-    yolo_train_batch = ['npt_nfrozen', 'pt_frozen', 'pt_nfrozen']
+    yolo_train_batch = ['pt_nfrozen']
     for model in yolo_train_batch:
         main(model)
