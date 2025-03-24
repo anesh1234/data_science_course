@@ -8,10 +8,10 @@ def main(config_name:str):
     # Show GPU status
     DEVICE = None
     if torch.cuda.is_available():
-        print('\nTorch can Access CUDA: TRUE\n')
+        print('\nCUDA is Available: TRUE\n')
         DEVICE = 'cuda'
     else:
-        print('\nTorch can Access CUDA: FALSE\n')
+        print('\nCUDA is Available: FALSE\n')
         DEVICE = 'cpu'
     
     # Load a configuration YAML file
@@ -71,6 +71,5 @@ if __name__ == '__main__':
     # 'pt_frozen' - Pre-trained and frozen CNN backbone
     # 'pt_nfrozen' - Pre-trained and no frozen layers
 
-    yolo_train_batch = ['pt_nfrozen']
-    for model in yolo_train_batch:
-        main(model)
+    yolo_train_batch = ['npt_nfrozen', 'pt_nfrozen', 'pt_frozen']
+    main(yolo_train_batch[2])
