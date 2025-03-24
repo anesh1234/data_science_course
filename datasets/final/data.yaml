@@ -1,3 +1,6 @@
+# Dataset root dir, all other paths are relative to this
+path: D:/git-repos/data_science_course/datasets/final
+
 train: train/images
 val: valid/images
 test: test/images
@@ -7,4 +10,4 @@ val_label_dir: valid/labels
 test_label_dir: test/labels
 
 nc: 8
-['Broken Down Crow/Root', 'Fractured', 'Impacted Tooth', 'Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']
+names: ['Broken Down Crow/Root', 'Fractured', 'Impacted Tooth', 'Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']

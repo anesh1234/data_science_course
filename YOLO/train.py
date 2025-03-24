@@ -26,7 +26,7 @@ def main(config_name:str):
     # https://docs.ultralytics.com/modes/train/#train-settings
     model.train(data= "datasets/final/data.yaml",  # data (str): Path to dataset configuration file.
                 epochs= 300,                       # epochs (int): Number of training epochs. 
-                batch= 60,                         # Batch size, with three modes: set as an integer (e.g., batch=16), auto mode for 60% GPU memory utilization (batch=-1), or auto mode with specified utilization fraction (batch=0.70).
+                batch= 50,                         # Batch size, with three modes: set as an integer (e.g., batch=16), auto mode for 60% GPU memory utilization (batch=-1), or auto mode with specified utilization fraction (batch=0.70).
                 imgsz= 640,                        # imgsz (int): Input image size.
                 device= DEVICE,                    # device (str): Device to run training on (e.g., 'cuda', 'cpu').
                 optimizer= 'Adam',                 # optimizer (str): Options include SGD, Adam, AdamW, NAdam, RAdam, RMSProp etc., or auto for automatic selection based on model configuration. Affects convergence speed and stability.    
@@ -72,4 +72,4 @@ if __name__ == '__main__':
     # 'pt_nfrozen' - Pre-trained and no frozen layers
 
     yolo_train_batch = ['npt_nfrozen', 'pt_nfrozen', 'pt_frozen']
-    main(yolo_train_batch[2])
+    main(yolo_train_batch[1])
