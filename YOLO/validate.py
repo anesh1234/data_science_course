@@ -31,7 +31,6 @@ def main(train_id, config):
     print("Specific precision metrics:", results.box.px)
     print("Recall:", results.box.r)
     print("Recall curve:", results.box.r_curve)
-    results.cls
 
 
 # Idiom to ensure that a new process cannot start before the
@@ -44,6 +43,6 @@ if __name__ == '__main__':
     # 'pt_frozen' - Pre-trained and frozen CNN backbone
     # 'pt_nfrozen' - Pre-trained and no frozen layers
 
-    train_id = 
-    config = 
+    train_id = 2
+    config = 'pt_nfrozen'
     main(train_id, config)
