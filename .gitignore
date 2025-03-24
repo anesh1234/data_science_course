@@ -179,4 +179,3 @@ shell.nix
 
 # Processing directory
 datasets/processing/
-datasets/final/

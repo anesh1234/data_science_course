@@ -171,9 +171,10 @@ def unifyDataset(labelPath):
         for line in tmp:
             label = line[0] # Only works because there are no labels above 9
             # label is 99 only if the line has to be dropped
-            if label != 99:
+            newLabel = replaceLabels(label, labelPath) 
+            if newLabel != "99":
                 # Keep the line
-                modified_line = replaceLabels(label, labelPath) + line[1:]
+                modified_line = newLabel + line[1:]
                 for_write.append(modified_line)
 
         # Write the changes (Overwrite the file if something was there)
