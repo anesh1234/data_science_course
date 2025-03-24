@@ -29,11 +29,20 @@ Classes in d3
 Classes in common between the datasets
 Normal d1 --- d3 Normal
 Impacted Tooth d2 --- d3 impacted tooth
-Caries d1 --- d3 Caries
+Caries d1 --- d3 Caries --- d2 Cavity --- d1 Badly Decayed --> Tooth Decay
+
+To remove some granularity
+Abcess d1 --- d3 Infected -> Infection
+Restoration d1 --- d1 Crown --- d1 Post --- d2 Fillings --- d2 Implants -> Restoration
 
 
-Unique classes (16)
+More granularity
+Unique classes: 16
 ['Abcess', 'Badly Decayed', 'Broken Down Crow/Root', 'Caries', 'Cavity', 'Crown', 'Fillings', 'Fractured', 'Impacted Tooth', 'Implant', 'Infected', 'Normal', 'Overhang', Post', 'RCT', 'Restoration']
+
+Less granularity
+Unique classes: 8
+['Broken Down Crow/Root', 'Fractured', 'Impacted Tooth','Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']
 '''
 
 import os
@@ -92,9 +101,13 @@ def CreateProcessingDir():
     os.mkdir(os.path.join(destination, "valid/images"))
     os.mkdir(os.path.join(destination, "valid/labels"))
 
-def replaceLabels(char, dataset):
+def replaceLabelsOld(char, dataset):
     '''
+    function kept to have more granularity
     Substitute char depending on the dataset used
+    Before
+    Unique classes: 16
+    ['Abcess', 'Badly Decayed', 'Broken Down Crow/Root', 'Caries', 'Cavity', 'Crown', 'Fillings', 'Fractured', 'Impacted Tooth', 'Implant', 'Infected', 'Normal', 'Overhang', Post', 'RCT', 'Restoration']
     '''
     # Instanciate a dictionnary containing the values that need to be changed depending on the dataset being "translated"    
     # The substitutions are explaned on line 16
@@ -115,6 +128,34 @@ def replaceLabels(char, dataset):
     else:
         return char
 
+def replaceLabels(char, dataset):
+    '''
+    Substitute char depending on the dataset used
+    Unique classes: 8
+    ['Broken Down Crow/Root', 'Fractured', 'Impacted Tooth','Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']
+    '''
+    # Instanciate a dictionnary containing the values that need to be changed depending on the dataset being "translated"    
+    # The substitutions are explaned on line 16
+    if dataset == os.path.join(d1Processing, "labels"):
+        # Values that change 0->3, 1->7, 2->7, 3->6, 4->deleted, 5->4, 7->5, 8->6
+        classes = {"0": "3", "1": "7", "2": "7", "3": "6", "4": "99", "5": "4", "7": "5", "8": "6"}
+    elif dataset == os.path.join(d2Processing, "labels"):
+        # Values that change 0->7, 1->6, 3->6
+        classes = {"0": "7", "1": "6", "3": "6"}
+    elif dataset == os.path.join(d3Processing, "labels"):
+        # Values that change 0->deleted, 1->7, 3->1, 4->3, 5->2
+        classes = {"0": "99", "1": "3", "3": "1", "4": "3", "5": "2"}
+    else:
+        classes = {}
+
+    # 99 is used to signal that the line should be dropped
+    # In this case only the "Normal" class is dropped
+    
+    if char in classes:
+        return classes[char]
+    else:
+        return char
+
 
 def unifyDataset(labelPath):
     '''
@@ -129,8 +170,11 @@ def unifyDataset(labelPath):
         # Rewrite each label (the labels are the first 'word' of each line)
         for line in tmp:
             label = line[0] # Only works because there are no labels above 9
-            modified_line = replaceLabels(label, labelPath) + line[1:]
-            for_write.append(modified_line)
+            # label is 99 only if the line has to be dropped
+            if label != 99:
+                # Keep the line
+                modified_line = replaceLabels(label, labelPath) + line[1:]
+                for_write.append(modified_line)
 
         # Write the changes (Overwrite the file if something was there)
         with open(os.path.join(labelPath, file), "w") as write:
@@ -162,7 +206,7 @@ def moveFilesToDest(src,filenames, dest):
     for file in filenames:
         shutil.copy(os.path.join(src,file), dest)
 
-def splitDataset(datasetPath, destination):
+def splitDataset(datasetPath, destination, seed):
     '''
     Split the dataset into train, test adn validation datasets
     The proportions are 70%, 20% and 10% respectively
@@ -183,9 +227,9 @@ def splitDataset(datasetPath, destination):
     y.sort()
 
     # Split the dataset into training and the rest
-    X_train, X_tmp, y_train, y_tmp = train_test_split(X,y, test_size=0.3, random_state=42)
+    X_train, X_tmp, y_train, y_tmp = train_test_split(X,y, test_size=0.3, random_state=seed)
     # Split the rest into test and validation
-    X_test, X_valid, y_test, y_valid = train_test_split(X_tmp,y_tmp, test_size=0.3, random_state=42)
+    X_test, X_valid, y_test, y_valid = train_test_split(X_tmp,y_tmp, test_size=0.66, random_state=seed)
 
     # move X_train and y_train to the train directory
     moveFilesToDest(srcImg, X_train, os.path.join(destTrain, "images"))
@@ -200,7 +244,7 @@ def splitDataset(datasetPath, destination):
     moveFilesToDest(srcAnn, y_valid, os.path.join(destVal, "labels"))
     
 
-def writeData():
+def writeDataOld():
     '''
     Write data.yaml file
     '''
@@ -216,14 +260,29 @@ def writeData():
         file.write("nc: 16\n")
         file.write("['Abcess', 'Badly Decayed', 'Broken Down Crow/Root', 'Caries', 'Cavity', 'Crown', 'Fillings', 'Fractured', 'Impacted Tooth', 'Implant', 'Infected', 'Normal', 'Overhang', Post', 'RCT', 'Restoration']\n")
 
+def writeData():
+    '''
+    Write data.yaml file
+    '''
+    with open(os.path.join(destination,"data.yaml"), "a") as file:
+        file.write("train: train/images\n")
+        file.write("val: valid/images\n")
+        file.write("test: test/images\n")
+        file.write("\n")
+        file.write("train_label_dir: train/labels\n")
+        file.write("val_label_dir: valid/labels\n")
+        file.write("test_label_dir: test/labels\n")
+        file.write("\n")
+        file.write("nc: 8\n")
+        file.write("['Broken Down Crow/Root', 'Fractured', 'Impacted Tooth', 'Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']")
 
 CreateProcessingDir()
 processDataset(d1Path, d1Processing)
 processDataset(d2Path, d2Processing)
 processDataset(d3Path, d3Processing)
 
-splitDataset(d1Processing, destination)
-splitDataset(d2Processing, destination)
-splitDataset(d3Processing, destination)
+splitDataset(d1Processing, destination, 42)
+splitDataset(d2Processing, destination, 42)
+splitDataset(d3Processing, destination, 42)
 
 writeData()
