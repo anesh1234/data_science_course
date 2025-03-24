@@ -143,8 +143,8 @@ def replaceLabels(char, dataset):
         # Values that change 0->7, 1->6, 3->6
         classes = {"0": "7", "1": "6", "3": "6"}
     elif dataset == os.path.join(d3Processing, "labels"):
-        # Values that change 0->deleted, 1->7, 3->1, 4->3, 5->2
-        classes = {"0": "99", "1": "3", "3": "1", "4": "3", "5": "2"}
+        # Values that change 0->deleted, 1->7, 3->1, 4->3, 5->1
+        classes = {"0": "99", "1": "7", "3": "1", "4": "3", "5": "1"}
     else:
         classes = {}
 
