@@ -48,7 +48,7 @@ def write_YOLO_annotation(row, folder):
     # write the annotations into the file
     data = ""
     for i in range(1,6):
-        data = data + " " + str(row.iloc[i]) 
+        data = data + str(row.iloc[i]) + " "
 
     file.write(data + "\n")
 

@@ -19,12 +19,15 @@ Read this to understand how the classes were handled
 
 Classes in d1
 ['Abcess', 'Badly Decayed', 'Caries', 'Crown', 'Normal', 'Overhang', 'Post', 'RCT', 'Restoration']
+   0:3           1:7            2:7     3:6      4:99        5:4      6:6     7:5         8:6
 
 Classes in d2
 ['Cavity', 'Fillings', 'Impacted Tooth', 'Implant']
+    0:7        1:6          2:2             3:6
 
 Classes in d3
 ['Normal', 'Caries', 'impacted tooth', 'Broken Down Crow/Root', 'Infected', 'Fractured']
+    0:99      1:7           2:2                  3:0                4:3          5:1   
 
 Classes in common between the datasets
 Normal d1 --- d3 Normal
@@ -138,13 +141,16 @@ def replaceLabels(char, dataset):
     # The substitutions are explaned on line 16
     if dataset == os.path.join(d1Processing, "labels"):
         # Values that change 0->3, 1->7, 2->7, 3->6, 4->deleted, 5->4, 7->5, 8->6
-        classes = {"0": "3", "1": "7", "2": "7", "3": "6", "4": "99", "5": "4", "7": "5", "8": "6"}
+        #   0:3           1:7            2:7     3:6      4:99        5:4      6:6     7:5         8:6
+        classes = {"0": "3", "1": "7", "2": "7", "3": "6", "4": "99", "5": "4", "6": "6" ,"7": "5", "8": "6"}
     elif dataset == os.path.join(d2Processing, "labels"):
         # Values that change 0->7, 1->6, 3->6
-        classes = {"0": "7", "1": "6", "3": "6"}
+        #    0:7        1:6          2:2             3:6
+        classes = {"0": "7", "1": "6", "2": "2", "3": "6"}
     elif dataset == os.path.join(d3Processing, "labels"):
         # Values that change 0->deleted, 1->7, 3->1, 4->3, 5->1
-        classes = {"0": "99", "1": "7", "3": "1", "4": "3", "5": "1"}
+        #     0:99      1:7           2:2                  3:0                4:3          5:1
+        classes = {"0": "99", "1": "7", "2": "2", "3": "0", "4": "3", "5": "1"}
     else:
         classes = {}
 
