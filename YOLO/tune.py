@@ -6,7 +6,7 @@ def main():
     model = YOLO('yolo11n.pt')
     results = model.tune(data= "datasets/final/data.yaml",
                          iterations= 30,
-                         epochs= 5,
+                         epochs= 5,                         # The number of epochs to train the model per iteration
                          project= 'YOLO/tuning_runs',
                          device= 'cuda'
                          )

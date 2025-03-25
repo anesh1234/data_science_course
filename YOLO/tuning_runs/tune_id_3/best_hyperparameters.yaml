@@ -1,0 +1,30 @@
+# 30/30 iterations complete ✅ (5306.66s)
+# Results saved to YOLO\tuning_runs\tune
+# Best fitness=0.22961 observed at iteration 24
+# Best fitness metrics are {'metrics/precision(B)': 0.63385, 'metrics/recall(B)': 0.40537, 'metrics/mAP50(B)': 0.39185, 'metrics/mAP50-95(B)': 0.21158, 'val/box_loss': 1.38872, 'val/cls_loss': 1.47372, 'val/dfl_loss': 0.73091, 'fitness': 0.22961}
+# Best fitness model is YOLO\tuning_runs\train24
+# Best fitness hyperparameters are printed below.
+
+lr0: 0.01056
+lrf: 0.00705
+momentum: 0.81053
+weight_decay: 0.00054
+warmup_epochs: 2.62476
+warmup_momentum: 0.70931
+box: 6.88736
+cls: 0.4794
+dfl: 0.72781
+hsv_h: 0.01524
+hsv_s: 0.56541
+hsv_v: 0.48063
+degrees: 0.0
+translate: 0.07406
+scale: 0.28985
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.47655
+bgr: 0.0
+mosaic: 1.0
+mixup: 0.0
+copy_paste: 0.0

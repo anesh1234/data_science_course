@@ -1,5 +1,5 @@
 # Dataset root dir, all other paths are relative to this
-path: C:/Users/ander/Documents/git-repos/data_science_course/datasets/final
+path: D:\git-repos\data_science_course\datasets\final
 
 train: train/images
 val: valid/images
