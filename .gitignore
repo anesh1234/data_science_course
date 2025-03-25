@@ -177,5 +177,3 @@ shell.nix
 *.safetensors
 *.pt
 
-# Processing directory
-datasets/processing/

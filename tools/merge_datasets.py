@@ -52,6 +52,7 @@ import os
 import shutil
 import glob
 from sklearn.model_selection import train_test_split
+from collections import defaultdict
 
 commonPath = "datasets/"
 
@@ -215,11 +216,10 @@ def moveFilesToDest(src,filenames, dest):
 
 def splitDataset(datasetPath, destination, seed):
     '''
-    Split the dataset into train, test adn validation datasets
-    The proportions are 70%, 20% and 10% respectively
+    Split the dataset into train and validation datasets
+    The proportions are 80% and 20% respectively
     '''
     destTrain = os.path.join(destination, "train")
-    destTest = os.path.join(destination, "test")
     destVal = os.path.join(destination, "valid")
 
     srcImg = os.path.join(datasetPath, "images")
@@ -234,22 +234,15 @@ def splitDataset(datasetPath, destination, seed):
     y.sort()
 
     # Split the dataset into training and the rest
-    X_train, X_tmp, y_train, y_tmp = train_test_split(X,y, test_size=0.3, random_state=seed)
-    # Split the rest into test and validation
-    X_test, X_valid, y_test, y_valid = train_test_split(X_tmp,y_tmp, test_size=0.66, random_state=seed)
+    X_train, X_valid, y_train, y_valid = train_test_split(X,y, test_size=0.2, random_state=seed)
 
     # move X_train and y_train to the train directory
     moveFilesToDest(srcImg, X_train, os.path.join(destTrain, "images"))
     moveFilesToDest(srcAnn, y_train, os.path.join(destTrain, "labels"))
 
-    # move X_test and y_test to the test directory
-    moveFilesToDest(srcImg, X_test, os.path.join(destTest, "images"))
-    moveFilesToDest(srcAnn, y_test, os.path.join(destTest, "labels"))
-
     # move X_val and y_val to the valid directory
     moveFilesToDest(srcImg, X_valid, os.path.join(destVal, "images"))
     moveFilesToDest(srcAnn, y_valid, os.path.join(destVal, "labels"))
-    
 
 def writeDataOld():
     '''
@@ -272,6 +265,10 @@ def writeData():
     Write data.yaml file
     '''
     with open(os.path.join(destination,"data.yaml"), "a") as file:
+        
+        file.write("# Dataset root dir, all other paths are relative to this\n")
+        file.write("path: C:/Users/ander/Documents/git-repos/data_science_course/datasets/final\n")
+        file.write("\n")
         file.write("train: train/images\n")
         file.write("val: valid/images\n")
         file.write("test: test/images\n")
@@ -281,7 +278,33 @@ def writeData():
         file.write("test_label_dir: test/labels\n")
         file.write("\n")
         file.write("nc: 8\n")
-        file.write("['Broken Down Crow/Root', 'Fractured', 'Impacted Tooth', 'Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']")
+        file.write("names: ['Broken Down Crown/Root', 'Fractured', 'Impacted Tooth', 'Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']")
+
+def mergeBeforeSplit(destination):
+    if os.path.exists(destination):
+        shutil.rmtree(destination)
+    os.mkdir(destination)
+ 
+    destImg = os.path.join(destination, "images")
+    destLab = os.path.join(destination, "labels")
+ 
+    os.mkdir(destImg)
+    os.mkdir(destLab)
+ 
+    d1Img = os.path.join(d1Processing, "images")
+    d1Ann = os.path.join(d1Processing, "labels")
+    d2Img = os.path.join(d2Processing, "images")
+    d2Ann = os.path.join(d2Processing, "labels")
+    d3Img = os.path.join(d3Processing, "images")
+    d3Ann = os.path.join(d3Processing, "labels")
+ 
+    shutil.copytree(d1Img, destImg, dirs_exist_ok=True)
+    shutil.copytree(d2Img, destImg, dirs_exist_ok=True)
+    shutil.copytree(d3Img, destImg, dirs_exist_ok=True)
+ 
+    shutil.copytree(d1Ann, destLab, dirs_exist_ok=True)
+    shutil.copytree(d2Ann, destLab, dirs_exist_ok=True)
+    shutil.copytree(d3Ann, destLab, dirs_exist_ok=True)
 
 CreateProcessingDir()
 processDataset(d1Path, d1Processing)

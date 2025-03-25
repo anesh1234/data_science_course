@@ -10,4 +10,4 @@ val_label_dir: valid/labels
 test_label_dir: test/labels
 
 nc: 8
-names: ['Broken Down Crow/Root', 'Fractured', 'Impacted Tooth', 'Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']
+names: ['Broken Down Crown/Root', 'Fractured', 'Impacted Tooth', 'Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']
