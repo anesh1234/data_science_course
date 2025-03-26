@@ -27,17 +27,20 @@ The /datasets folder contains the individual datasets we used: /d1, /d2 and /d3.
 
 The /tools folder contains scripts which were used to manipulate or gain insights about the datasets.
 
+Note: only relevant files are shown.
+
 ```
 ├── README.md
-├── requirements.txt
-├── testing_matrix.csv
-│
-├── DETR/                           Legacy folder kept just in case
+├── class_ocurrences.xlsx       Class ocurrences per dataset
+├── requirements.txt            
+├── DETR/                       Legacy folder
 │   └── train.py
-├── YOLO/
+├── YOLO/                       Contains the programs used to run the model
 │   ├── predict.py
 │   ├── train.py
-│   └── tune.py
+│   ├── tune.py
+│   ├── validate.py
+│   └ ...                       The rest is not shown 
 ├── datasets/
 │   ├── coco/d1/
 │   ├── d1/
@@ -55,21 +58,21 @@ The /tools folder contains scripts which were used to manipulate or gain insight
 │   │   ├── train/
 │   │   ├── test/
 │   │   └── valid/
-│   └── final/
-│       ├── data.yaml
-│       ├── train/
-│       ├── test/
-│       └── valid/
-└── tools/
-    ├── config.py
+│   ├── final/
+│   │   ├── data.yaml
+│   │   ├── train/
+│   │   ├── test/
+│   │   └── valid/
+│   └── processing/             Folder used when merging the datasets
+│       └── ...
+└── tools/                      Various programs used to process the datasest or extract information
     ├── convert_d2_ann.py
+    ├── count_class_occurence.py
     ├── get_max_dims.py
     ├── merge_datasets.py
-    ├── panoramic.py
-    ├── resize_radiography.py
-    ├── show_radiography.py
-    ├── config.py
-    └── testing/                Output directory to test some programs
+    ├── old_config.py
+    ├── old_resize_radiography.py
+    └── old_show_radiography.py
 ```
 
 ## Inference

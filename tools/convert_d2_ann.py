@@ -1,6 +1,7 @@
 '''
 Python program used to convert the csv annotations of the dataset d2 to YOLO annotations
 Can be called from the main folder by running 'python tools/convert_d2_ann.py'
+Author: Bastien Dufour
 '''
 import pandas as pd
 import os

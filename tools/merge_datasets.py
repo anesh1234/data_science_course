@@ -12,6 +12,8 @@ For instance, the size of the images of each datasets are:
     - d1: 640x640
     - d2: 512x256
     - d3: 640x342
+
+Author: Bastien Dufour
 '''
 
 '''
@@ -19,15 +21,12 @@ Read this to understand how the classes were handled
 
 Classes in d1
 ['Abcess', 'Badly Decayed', 'Caries', 'Crown', 'Normal', 'Overhang', 'Post', 'RCT', 'Restoration']
-   0:3           1:7            2:7     3:6      4:99        5:4      6:6     7:5         8:6
 
 Classes in d2
 ['Cavity', 'Fillings', 'Impacted Tooth', 'Implant']
-    0:7        1:6          2:2             3:6
 
 Classes in d3
 ['Normal', 'Caries', 'impacted tooth', 'Broken Down Crow/Root', 'Infected', 'Fractured']
-    0:99      1:7           2:2                  3:0                4:3          5:1   
 
 Classes in common between the datasets
 Normal d1 --- d3 Normal
@@ -39,11 +38,11 @@ Abcess d1 --- d3 Infected -> Infection
 Restoration d1 --- d1 Crown --- d1 Post --- d2 Fillings --- d2 Implants -> Restoration
 
 
-More granularity
+More granularity (Switch to the Old functions to use this)
 Unique classes: 16
 ['Abcess', 'Badly Decayed', 'Broken Down Crow/Root', 'Caries', 'Cavity', 'Crown', 'Fillings', 'Fractured', 'Impacted Tooth', 'Implant', 'Infected', 'Normal', 'Overhang', Post', 'RCT', 'Restoration']
 
-Less granularity
+Less granularity (What is currently used)
 Unique classes: 8
 ['Broken Down Crow/Root', 'Fractured', 'Impacted Tooth','Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']
 '''
@@ -52,7 +51,6 @@ import os
 import shutil
 import glob
 from sklearn.model_selection import train_test_split
-from collections import defaultdict
 
 commonPath = "datasets/"
 
@@ -281,6 +279,9 @@ def writeData():
         file.write("names: ['Broken Down Crown/Root', 'Fractured', 'Impacted Tooth', 'Infection', 'Overhang', 'RCT', 'Restoration', 'Tooth Decay']")
 
 def mergeBeforeSplit(destination):
+    '''
+    Merge the 3 datasets before splitting them into train and validation
+    '''
     if os.path.exists(destination):
         shutil.rmtree(destination)
     os.mkdir(destination)
@@ -305,6 +306,9 @@ def mergeBeforeSplit(destination):
     shutil.copytree(d1Ann, destLab, dirs_exist_ok=True)
     shutil.copytree(d2Ann, destLab, dirs_exist_ok=True)
     shutil.copytree(d3Ann, destLab, dirs_exist_ok=True)
+
+
+
 
 CreateProcessingDir()
 processDataset(d1Path, d1Processing)
