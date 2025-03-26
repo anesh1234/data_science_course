@@ -21,7 +21,7 @@ To enable training on GPU, you will need a CUDA enabled GPU, wchich can be check
 Further, the pytorch library must be installed in a [specific way](https://pytorch.org/get-started/locally), this is already in the requirements.txt, but might change over time.
 
 ## File Structure
-The [YOLO](https://github.com/anesh1234/data_science_course/tree/main/YOLO) folder contains files related to the YOLO model directly, including the train.py script, the predict.py script (perform inference with a model) and folder structures for storing results from running the training. Each model configuration we trained has its own folder, which contains their respective training results, and the best model achieved within the /weights subfolders. The subfolders are named with IDs, which correspond to the training iterations mentioned in our report. This is also true for the tuning runs. The .yaml files contain the dynamic training parameters for each configuration.
+The [YOLO](https://github.com/anesh1234/data_science_course/tree/main/YOLO) folder contains files related to the YOLO model directly, including the scripts used for training/validation/tuning/inference, and folder structures for storing results from running the these scripts. Each model configuration we trained has its own folder, which contains their respective training results, and the best model achieved within the /weights subfolders. The subfolders are named with IDs, which correspond to the training iterations mentioned in our report. This is also true for the tuning runs. The .yaml files contain the dynamic training parameters for each configuration.
 ```
 ├── README.md
 ├── requirements.txt
@@ -66,3 +66,6 @@ The [YOLO](https://github.com/anesh1234/data_science_course/tree/main/YOLO) fold
     ├── config.py
     └── testing/                Output directory to test some programs
 ```
+
+## Inference
+If you want to test our most successful model, this can be done with the [YOLO/predict.py](https://github.com/anesh1234/data_science_course/blob/main/YOLO/predict.py) script.

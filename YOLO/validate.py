@@ -49,6 +49,6 @@ if __name__ == '__main__':
     # 'pt_frozen' - Pre-trained and frozen CNN backbone
     # 'pt_nfrozen' - Pre-trained and no frozen layers
 
-    train_id = 1
+    train_id = 3
     config = 'npt_nfrozen'
     main(train_id, config)
