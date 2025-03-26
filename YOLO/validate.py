@@ -19,7 +19,6 @@ def main(train_id, config):
     print("\nF1 score:", results.box.f1)
     print("\nMean average precision 0.5-0.95:", results.box.map)
     print("\nMean average precision at IoU=0.50:", results.box.map50)
-    print("\nSpecific precision metrics:", results.box.px)
 
     # Combine the metrics into an ordered list
     measurements = [f'{config}', results.box.map50, results.box.map]
@@ -49,6 +48,6 @@ if __name__ == '__main__':
     # 'pt_frozen' - Pre-trained and frozen CNN backbone
     # 'pt_nfrozen' - Pre-trained and no frozen layers
 
-    train_id = 3
-    config = 'npt_nfrozen'
+    train_id = '3_part2'
+    config = 'pt_nfrozen'
     main(train_id, config)
