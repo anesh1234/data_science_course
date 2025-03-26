@@ -1,3 +1,9 @@
+"""
+    Script to aquire the maximum dimensions of all image files in our datasets. 
+    Used to verify that no valuable data would be lost when setting the image size parameter during YOLO training.
+    Author: Anders Mørk Minde
+"""
+
 import os
 from PIL import Image
 

@@ -1,0 +1,3 @@
+model: YOLO/pt_nfrozen/train_id_4/weights/best.pt
+freeze: None
+project: YOLO/pt_nfrozen

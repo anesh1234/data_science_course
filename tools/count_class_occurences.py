@@ -1,3 +1,8 @@
+"""
+    Script to count the number of class occurrences in our datasets, which was then entered in the "class_occurrences.xlsx" file
+    Author: Anders Mørk Minde
+"""
+
 import pandas as pd
 import os
 

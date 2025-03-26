@@ -65,5 +65,5 @@ if __name__ == '__main__':
     # 'pt_frozen' - Pre-trained and frozen CNN backbone
     # 'pt_nfrozen' - Pre-trained and no frozen layers
 
-    yolo_train_batch = ['npt_nfrozen', 'pt_nfrozen', 'pt_frozen']
-    main(yolo_train_batch[1])
+    yolo_train_batch = ['npt_nfrozen', 'pt_nfrozen', 'pt_frozen', 'pt_nfrozen_extra']
+    main(yolo_train_batch[3])
